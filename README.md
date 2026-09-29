@@ -23,18 +23,18 @@
 
 ```mermaid
 flowchart LR
-    U[用户] --> GUI[app.py<br/>WeiboCrawlerController]
-    GUI --> Q[事件队列 Queue]
-    GUI --> CFG[settings.json<br/>记住输出目录]
-    GUI --> D[weibo_downloader.py<br/>WeiboDownloader]
-    D --> C[Cookie/访客态管理]
-    D --> API[m.weibo.cn API]
-    D --> P[微博列表解析]
-    D --> M[媒体选择器<br/>最大图/最高视频/Live]
-    D --> F[本地文件系统]
-    F --> OUT[@昵称_uid 目录]
-    F --> SUM[汇总 txt]
-    F --> LOG[Recode_日志 txt]
+    U["用户"] --> GUI["app.py<br/>WeiboCrawlerController"]
+    GUI --> Q["事件队列 Queue"]
+    GUI --> CFG["settings.json<br/>记住输出目录"]
+    GUI --> D["weibo_downloader.py<br/>WeiboDownloader"]
+    D --> C["Cookie/访客态管理"]
+    D --> API["m.weibo.cn API"]
+    D --> P["微博列表解析"]
+    D --> M["媒体选择器<br/>最大图/最高视频/Live"]
+    D --> F["本地文件系统"]
+    F --> OUT["用户下载目录 @昵称_uid"]
+    F --> SUM["汇总 txt"]
+    F --> LOG["Recode 日志 txt"]
     D --> Q
     Q --> GUI
 ```
@@ -286,6 +286,7 @@ GUI 提供“停止”按钮，可中断当前下载任务。
 
 - `微博 UID`：指定要下载的微博用户
 - `起始页 / 结束页`：限定下载页码区间
+- `从最后下载`：默认选中。会按你填写的 `结束页 -> 起始页` 倒序下载；单页内也按最后一条到第一条下载，不再额外请求总页数
 - `输出目录`：指定下载根目录，并持久化记忆
 - `微博 Cookie`：提供登录态，避免风控或空列表
 - `开始爬取 / 继续下载`：启动任务，或在登录失效后从失败点恢复
